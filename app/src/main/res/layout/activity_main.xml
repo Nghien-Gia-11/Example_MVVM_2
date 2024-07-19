@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_game_play"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/imgBgAvt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_avatar" />
+
+    <ImageView
+        android:id="@+id/imgAvt"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@id/imgBgAvt"
+        app:layout_constraintTop_toTopOf="@id/imgBgAvt"
+        app:srcCompat="@drawable/ic_avatar" />
+
+    <ImageView
+        android:id="@+id/imgHeart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="@id/imgBgAvt"
+        app:layout_constraintTop_toTopOf="@id/imgBgAvt"
+        app:srcCompat="@drawable/ic_heart" />
+
+    <TextView
+        android:id="@+id/txtHeart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="14dp"
+        android:text="5"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/imgHeart"
+        app:layout_constraintTop_toTopOf="@id/imgHeart" />
+
+    <ImageView
+        android:id="@+id/imgCoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bg_coin" />
+
+    <TextView
+        android:id="@+id/txtPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="14dp"
+        android:text="1000"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintStart_toStartOf="@id/imgCoin"
+        app:layout_constraintTop_toTopOf="@id/imgCoin" />
+
+    <ImageView
+        android:id="@+id/imgBgNext"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgCoin"
+        app:srcCompat="@drawable/bg_next" />
+
+    <TextView
+        android:id="@+id/txtNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Câu tiếp"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgBgNext" />
+
+    <FrameLayout
+        android:id="@+id/imgBgBorder"
+        android:layout_width="wrap_content"
+        android:layout_height="250dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/bg_picture_border"
+        android:padding="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgCoin">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:src="@drawable/aomua"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTextAnswer"
+        android:layout_width="350dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgBgBorder" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTextSuggest"
+        android:layout_width="350dp"
+        android:layout_height="130dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
