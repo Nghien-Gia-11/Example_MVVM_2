@@ -2,6 +2,7 @@ package com.example.example_mvvm_2
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var suggestAdapter : SuggestAdapter
     private lateinit var answerAdapter : AnswerAdapter
+    private lateinit var question : Question
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,26 +31,24 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.listPicture.observe(this) { item ->
             listPic = item.toMutableList()
+            randomQuestion()
         }
 
         binding.imgBgNext.setOnClickListener {
-            val question = listPic.random()
-            randomQuestion(question)
+            randomQuestion()
         }
+    }
 
+    private fun randomQuestion(){
+        question = listPic.random()
+        binding.imgQuestion.setImageResource(question.picture)
+        setAdapterTextSuggest()
+    }
+
+    private fun setAdapterTextSuggest(){
         binding.recyclerTextSuggest.apply {
-            adapter = SuggestAdapter("ssasd")
+            adapter  = SuggestAdapter(question.answer)
             layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL)
         }
-
     }
-
-    private fun randomQuestion(question : Question){
-        Glide
-            .with(this)
-            .load(question.picture)
-            .into(binding.imgQuestion)
-    }
-
-
 }
