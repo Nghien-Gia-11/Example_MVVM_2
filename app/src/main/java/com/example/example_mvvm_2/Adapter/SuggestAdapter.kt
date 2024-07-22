@@ -31,7 +31,12 @@ class SuggestAdapter(private var suggest : String, private val onClick : OnClick
                 notifyItemChanged(position)
             }
         }
+    }
 
+    private fun isUnCorrect(){
+        for (i in visibilityList.indices){
+            visibilityList[i] = true
+        }
     }
 
 
