@@ -1,15 +1,16 @@
 package com.example.example_mvvm_2.Adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.example_mvvm_2.OnClickRecycler.OnClick
 import com.example.example_mvvm_2.databinding.LayoutTextSuggestBinding
-import kotlin.random.Random
 
-class SuggestAdapter(private var suggest : String) : RecyclerView.Adapter<SuggestAdapter.ViewHolder>() {
+class SuggestAdapter(private var suggest : String, private val onClick : OnClick) : RecyclerView.Adapter<SuggestAdapter.ViewHolder>() {
 
     private lateinit var binding : LayoutTextSuggestBinding
-
+    private val visibilityList = MutableList(suggest.length) { true }
     inner class ViewHolder(binding : LayoutTextSuggestBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,27 +22,17 @@ class SuggestAdapter(private var suggest : String) : RecyclerView.Adapter<Sugges
     override fun getItemCount(): Int = 16
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        textSuggest()
         holder.itemView.apply {
             binding.txtTextSuggest.text = suggest[position].toString()
-        }
-    }
-
-    private fun textSuggest(){
-        for (i in 0 .. 16){
-            if (suggest.length < 16){
-                suggest = setTextRandom(('a'..'z').random())
-            }
-            else{
-                break
+            visibility = if (visibilityList[position]) View.VISIBLE else View.INVISIBLE
+            setOnClickListener {
+                onClick.onClick(position)
+                visibilityList[position] = false
+                notifyItemChanged(position)
             }
         }
+
     }
 
-    private fun setTextRandom(charter : Char) : String{
-        val randomIndex = Random.nextInt(0, suggest.length + 1)
-        val first = suggest.substring(0, randomIndex)
-        val second = suggest.substring(randomIndex)
-        return first + charter + second
-    }
+
 }

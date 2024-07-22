@@ -23,7 +23,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
-
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="@id/imgBgAvt"
         app:layout_constraintTop_toTopOf="@id/imgBgAvt"
@@ -117,8 +116,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerTextAnswer"
-        android:layout_width="350dp"
-        android:layout_height="130dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
