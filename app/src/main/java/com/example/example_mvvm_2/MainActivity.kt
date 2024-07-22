@@ -3,33 +3,51 @@ package com.example.example_mvvm_2
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.bumptech.glide.Glide
+import com.example.example_mvvm_2.Adapter.AnswerAdapter
+import com.example.example_mvvm_2.Adapter.SuggestAdapter
 import com.example.example_mvvm_2.Model.Question
+import com.example.example_mvvm_2.ViewModel.MainViewModel
 import com.example.example_mvvm_2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainBinding
-    private var lsPic = mutableListOf<Question>()
+    private var listPic = mutableListOf<Question>()
+    private val viewModel : MainViewModel by viewModels()
 
+    private lateinit var suggestAdapter : SuggestAdapter
+    private lateinit var answerAdapter : AnswerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        lsPic.add(Question(R.drawable.baocao,"baocao"))
-        lsPic.add(Question(R.drawable.aomua,"aomua"))
-        lsPic.add(Question(R.drawable.canthiep,"canthiep"))
-        lsPic.add(Question(R.drawable.cattuong,"cattuong"))
-        lsPic.add(Question(R.drawable.chieutre,"chieutre"))
-        lsPic.add(Question(R.drawable.danong,"danong"))
-        lsPic.add(Question(R.drawable.danhlua,"danhlua"))
-        lsPic.add(Question(R.drawable.giandiep,"giandiep"))
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        Log.e("TAG",lsPic[1].answer.length.toString())
+        viewModel.listPicture.observe(this) { item ->
+            listPic = item.toMutableList()
+        }
 
+        binding.imgBgNext.setOnClickListener {
+            val question = listPic.random()
+            randomQuestion(question)
+        }
+
+        binding.recyclerTextSuggest.apply {
+            adapter = SuggestAdapter("ssasd")
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.HORIZONTAL)
+        }
+
+    }
+
+    private fun randomQuestion(question : Question){
+        Glide
+            .with(this)
+            .load(question.picture)
+            .into(binding.imgQuestion)
     }
 
 
