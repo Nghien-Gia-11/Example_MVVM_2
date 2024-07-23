@@ -31,10 +31,10 @@ class AnswerAdapter(
         } else {
             holder.binding.txtTextAnswer.text = answer[position]
         }
-        if (isChanged == 2 ){
-            holder.itemView.setBackgroundResource(R.drawable.ic_tile_true)
-        }else if (isChanged == 3){
-            holder.itemView.setBackgroundResource(R.drawable.ic_tile_false)
+        when(isChanged){
+            1 -> holder.itemView.setBackgroundResource(R.drawable.ic_tile_answer)
+            2 -> holder.itemView.setBackgroundResource(R.drawable.ic_tile_true)
+            else -> holder.itemView.setBackgroundResource(R.drawable.ic_tile_false)
         }
     }
 

@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var listPic = mutableListOf<Question>()
     private val viewModel: MainViewModel by viewModels()
-    private lateinit var suggestAdapter: SuggestAdapter
     private lateinit var answerAdapter: AnswerAdapter
     private lateinit var question: Question
     private lateinit var suggest: String
@@ -50,6 +49,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.imgBgNext.setOnClickListener {
             randomQuestion()
+            answer.clear()
+            setAdapterAnswer()
+            answerAdapter.setBackgroundChanged(1)
+            answerAdapter.notifyDataSetChanged()
         }
     }
 
@@ -57,6 +60,7 @@ class MainActivity : AppCompatActivity() {
         question = listPic.random()
         suggest = question.answer
         idPic = suggest
+        Log.e("TAG", idPic)
         binding.imgQuestion.setImageResource(question.picture)
         setAdapterTextSuggest()
     }
@@ -70,22 +74,25 @@ class MainActivity : AppCompatActivity() {
                     answer.add(suggest[pos].toString())
                     answerAdapter.notifyDataSetChanged()
                     if (answer.size == idPic.length) {
+                        check = ""
                         for (i in answer.indices) {
                             check += answer[i]
                         }
+                        Log.e("TAG", check)
                         if (check == idPic) {
                             answerAdapter.setBackgroundChanged(2)
                             score += 100
                             binding.txtScore.text = score.toString()
                             binding.imgBgNext.visibility = View.VISIBLE
                             binding.txtNext.visibility = View.VISIBLE
-                            answer.clear()
                             answerAdapter.notifyDataSetChanged()
+                            Toast.makeText(this@MainActivity, "Correct", Toast.LENGTH_LONG).show()
                         } else {
                             answerAdapter.setBackgroundChanged(3)
                             heart -= 1
+                            binding.imgBgNext.visibility = View.VISIBLE
+                            binding.txtNext.visibility = View.VISIBLE
                             binding.txtHeart.text = heart.toString()
-                            answer.clear()
                             answerAdapter.notifyDataSetChanged()
                         }
                     }
